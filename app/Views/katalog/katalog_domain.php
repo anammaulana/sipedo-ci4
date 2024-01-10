@@ -1,6 +1,6 @@
 <!-- File: app/Views/dashboard/katalog.php -->
 <!--  -->
-<?= $this->extend('katalog/index'); ?>
+<?= $this->extend('katalog/components/index'); ?>
 <?= $this->section('content'); ?>
 <div class="container-fluid">
     <div class="row">

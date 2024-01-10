@@ -23,7 +23,7 @@ class Admin extends BaseController
     public function index(): string
     {
         $data = [
-            "title" => "Sipedo | Panel Admin",
+            "title" => "Sipedo | Dashboard Admin",
 
         ];
         return view('admin/index', $data);

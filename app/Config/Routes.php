@@ -13,6 +13,9 @@ $routes->post('/admin/update_user/(:num)', 'Admin::update_user/$1', ['filter' =>
 
 
 $routes->get('/', 'Katalog::index');
+$routes->get('/katalog', 'Katalog::katalog');
+$routes->get('/profile', 'Katalog::profile');
+
 $routes->get('user', 'User::index');
 $routes->get('user/pengajuan_domain', 'User::pengajuan_domain');
 $routes->post('user/store_pengajuan_domain', 'User::store_pengajuan_domain');

@@ -67,7 +67,7 @@
     <!-- Heading -->
     <hr class="sidebar-divider">
     <li class="nav-item">
-        <a class="nav-link" href="user/profile">
+        <a class="nav-link" href="masih on progres">
             <i class="fas fa-fw fa-user"></i>
             <span>My Profile</span></a>
     </li>
@@ -75,7 +75,7 @@
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('user/changepassword'); ?>">
+        <a class="nav-link" href="<?= base_url('tahap pengembangan '); ?>">
             <i class="fas fa-fw fa-unlock-alt"></i>
             <span>Change Password</span></a>
     </li>
@@ -90,7 +90,7 @@
     </li>
     <hr class="sidebar-divider">
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('/'); ?>">
+        <a class="nav-link" href="<?= base_url('/katalog'); ?>">
             <i class="fas fa-fw fa-file-invoice"></i>
             <span>Katalog Aplikasi</span></a>
     </li>

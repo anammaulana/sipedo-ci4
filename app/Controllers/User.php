@@ -31,10 +31,10 @@ class User extends BaseController
         $data = [
             // 'domains' => $model->getDomainsWithDetails(),
             // 'model' => $model,
-            'title' => 'Sipedo | Pages User '
+            'title' => 'Sipedo | Dashbord User '
         ];
 
-        return view('user/user', $data);
+        return view('user/index', $data);
     }
 
     public function pengajuan_domain()

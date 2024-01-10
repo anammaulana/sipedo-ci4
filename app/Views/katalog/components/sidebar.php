@@ -16,13 +16,13 @@
      </div>
      <hr class="sidebar-divider">
      <li class="nav-item">
-         <a class="nav-link" href="">
+         <a class="nav-link" href="/profile">
              <i class="far fa-fw fa-building"></i>
              <span>Profile Diskominfo</span></a>
      </li>
      <hr class="sidebar-divider">
      <li class="nav-item">
-         <a class="nav-link" href="<?= base_url('/'); ?>">
+         <a class="nav-link" href="<?= base_url('/katalog'); ?>">
              <i class="fas fa-fw fa-list-ul"></i>
              <span>Katalog Aplikasi</span></a>
      </li>
@@ -30,7 +30,7 @@
 
      <?php if (in_groups('admin')) : ?>
      <li class="nav-item">
-         <a class="nav-link" href="<?= base_url('user'); ?>">
+         <a class="nav-link" href="<?= base_url('admin'); ?>">
              <i class="fas fa-fw fa-tachometer-alt"></i>
              <span> My Dashboard </span></a>
      </li>
@@ -54,7 +54,7 @@
          <hr class="sidebar-divider"> -->
      <?php endif; ?>
      <li class="nav-item">
-         <a class="nav-link" href="<?= base_url('login'); ?>">
+         <a class="nav-link" href="<?= base_url('register'); ?>">
              <i class="fas fa- fw fa-sign-in-alt"></i>
              <span>Sign up or login</span></a>
      </li>

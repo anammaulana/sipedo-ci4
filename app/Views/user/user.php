@@ -8,7 +8,11 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1>hai user..</h1>              
+                <h1>hai sahabat <?php user()->username; ?></h1>
+                <p>untuk mengakses dasboard admin anda harus menggunakan dulu email default pada aplikasi ini </p>
+                <p>admin@gmail.com</p>
+                <p>pass:210447</p>
+                <P> nikmati fitur fitur admin setelah login pake akun ini terimakasih </P>
             </div>
         </div>
     </div>
