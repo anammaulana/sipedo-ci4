@@ -54,7 +54,7 @@
         </li>
         <hr class="sidebar-divider">
         <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('admin/index'); ?>">
+            <a class="nav-link" href="<?= base_url('/admin/datausers'); ?>">
                 <i class="fas fa-fw fa-users"></i>
                 <span>Data User</span></a>
         </li>

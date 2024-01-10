@@ -27,6 +27,15 @@
              <span>Katalog Aplikasi</span></a>
      </li>
      <hr class="sidebar-divider">
+
+     <?php if (in_groups('admin')) : ?>
+     <li class="nav-item">
+         <a class="nav-link" href="<?= base_url('user'); ?>">
+             <i class="fas fa-fw fa-tachometer-alt"></i>
+             <span> My Dashboard </span></a>
+     </li>
+     <?php endif; ?>
+
      <?php if (in_groups('user')) : ?>
 
          <li class="nav-item">
@@ -37,12 +46,12 @@
 
          <hr class="sidebar-divider">
          <!-- Nav Item - Tables -->
-         <li class="nav-item">
+         <!-- <li class="nav-item">
              <a class="nav-link" href="<?= base_url('logout'); ?>">
                  <i class="fas fa-fw fa-sign-out-alt"></i>
                  <span>Logout</span></a>
          </li>
-         <hr class="sidebar-divider">
+         <hr class="sidebar-divider"> -->
      <?php endif; ?>
      <li class="nav-item">
          <a class="nav-link" href="<?= base_url('login'); ?>">

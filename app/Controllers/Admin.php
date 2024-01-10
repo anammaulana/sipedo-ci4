@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Models\OpdModel;
@@ -21,7 +22,15 @@ class Admin extends BaseController
     }
     public function index(): string
     {
+        $data = [
+            "title" => "Sipedo | Panel Admin",
 
+        ];
+        return view('admin/index', $data);
+    }
+    //todo buat Crud Users
+    public function datausers()
+    {
 
         // ? Menentukan kolom yang ingin diambil
         $this->builder->select('users.id as userid, username, email, name');
@@ -38,11 +47,76 @@ class Admin extends BaseController
 
         // Tampilkan view dengan data 
         $data = [
-            "title" => "Sipedo | Panel Admin",
+            "title" => "Sipedo | Data Users",
             'users' => $query->getResult()
         ];
-        return view('admin/index', $data);
+        return view('admin/data_users', $data);
     }
+  // Admin.php
+// ... (kode lain) ...
+
+public function edit_user($id)
+{
+    $this->builder->select('users.id as user_id, username, email, name, user_image, auth_groups_users.group_id');
+    $this->builder->join('auth_groups_users', 'auth_groups_users.user_id = users.id', 'left');
+    $this->builder->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id', 'left');
+    $this->builder->where('users.id', $id);
+
+    // Eksekusi query
+    $query = $this->builder->get();
+
+    // Mengambil hasil query
+    $user = $query->getRow();
+
+    // Mengambil daftar grup dari hasil query
+    $groupsModel = new \Myth\Auth\Models\GroupModel();
+    $groups = $groupsModel->findAll();
+
+    $data = [
+        "title" => "Sipedo | Edit User",
+        'user' => $user,
+        'groups' => $groups, // Menggunakan variabel $groups yang berisi daftar grup
+    ];
+
+    return view('admin/edit_user', $data);
+}
+
+
+public function update_user($id)
+{
+    // Mengambil data dari formulir
+    $newGroupId = $this->request->getPost('group_id');
+
+    // Memperbarui peran pengguna hanya jika peran yang dipilih adalah admin
+    $data = [
+        'group_id' => $newGroupId,
+    ];
+
+    // Menggunakan Query Builder untuk melakukan UPDATE ke tabel 'auth_groups_users'
+    $this->db->table('auth_groups_users')
+        ->where('user_id', $id)
+        ->update($data);
+
+    return redirect()->to(base_url('admin/datausers'))->with('success', 'User role updated successfully.');
+}
+
+    
+    // Metode untuk menentukan apakah peran adalah admin
+    private function isAdminRole($groupId)
+    {
+        // Menggunakan Query Builder untuk mencari informasi peran
+        $query = $this->db->table('auth_groups')
+            ->select('name')
+            ->where('id', $groupId)
+            ->get();
+    
+        $group = $query->getRow();
+    
+        // Menentukan apakah peran adalah admin (sesuaikan dengan struktur tabel dan data peran Anda)
+        return ($group && $group->name == 'admin');
+    }
+    
+    
 
     public function detail_user($id)
     {
@@ -56,13 +130,15 @@ class Admin extends BaseController
 
         // todo Mengambil hasil query
         $results = $query->getRow();
-        $data = 
-        [
-            "title" => "Sipedo | Detail User",
-            'user' => $query->getRow()
-        ];
+        $data =
+            [
+                "title" => "Sipedo | Detail User",
+                'user' => $query->getRow()
+            ];
         return view('admin/detail_users', $data);
     }
+
+    //todo buat Crud Users ended
 
     public function dashboard()
     {
@@ -94,32 +170,32 @@ class Admin extends BaseController
     }
 
     public function approve($id)
-{
-    // Tambahkan validasi apakah pengguna memiliki otoritas untuk menyetujui
-    if (!in_groups('admin')) {
-        // Redirect atau berikan pesan error
-        return redirect()->back()->with('error', 'You do not have permission to approve.');
+    {
+        // Tambahkan validasi apakah pengguna memiliki otoritas untuk menyetujui
+        if (!in_groups('admin')) {
+            // Redirect atau berikan pesan error
+            return redirect()->back()->with('error', 'You do not have permission to approve.');
+        }
+
+        $model = new DomainModel();
+        $model->update($id, ['status' => 'Approved']);
+
+        return redirect()->to(base_url('admin/approval'));
     }
 
-    $model = new DomainModel();
-    $model->update($id, ['status' => 'Approved']);
+    public function reject($id)
+    {
+        // Tambahkan validasi apakah pengguna memiliki otoritas untuk menolak
+        if (!in_groups('admin')) {
+            // Redirect atau berikan pesan error
+            return redirect()->back()->with('error', 'You do not have permission to reject.');
+        }
 
-    return redirect()->to(base_url('admin/approval'));
-}
+        $model = new DomainModel();
+        $model->update($id, ['status' => 'Rejected']);
 
-public function reject($id)
-{
-    // Tambahkan validasi apakah pengguna memiliki otoritas untuk menolak
-    if (!in_groups('admin')) {
-        // Redirect atau berikan pesan error
-        return redirect()->back()->with('error', 'You do not have permission to reject.');
+        return redirect()->to(base_url('admin/approval'));
     }
-
-    $model = new DomainModel();
-    $model->update($id, ['status' => 'Rejected']);
-
-    return redirect()->to(base_url('admin/approval'));
-}
 
 
     public function detail($id)

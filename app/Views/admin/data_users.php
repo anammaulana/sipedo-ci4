@@ -25,6 +25,7 @@
                                 <td><?= $user->email; ?></td>
                                 <td><?= $user->name; ?></td>
                                 <td>
+                                    <a href="<?= base_url('admin/edit_user/' . $user->userid) ?>" class="btn btn-user btn-warning">edit</a>
                                     <a href="<?= base_url('admin/' . $user->userid) ?>" class="btn btn-user btn-info">detail</a>
                                 </td>
                             </tr>

@@ -6,8 +6,12 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/admin', 'Admin::index', ['filter' => 'role:admin']);
-$routes->get('/admin/index', 'Admin::index', ['filter' => 'role:admin']);
+$routes->get('/admin/datausers', 'Admin::datausers', ['filter' => 'role:admin']);
 $routes->get('/admin/(:num)', 'Admin::detail_user/$1', ['filter' => 'role:admin']);
+$routes->get('/admin/edit_user/(:num)', 'Admin::edit_user/$1', ['filter' => 'role:admin']);
+$routes->post('/admin/update_user/(:num)', 'Admin::update_user/$1', ['filter' => 'role:admin']);
+
+
 $routes->get('/', 'Katalog::index');
 $routes->get('user', 'User::index');
 $routes->get('user/pengajuan_domain', 'User::pengajuan_domain');
